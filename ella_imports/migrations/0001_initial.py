@@ -4,17 +4,17 @@ from django.db import models
 from ella.imports.models import *
 
 class Migration:
-    
+
     depends_on = (
         ("core", "0001_initial"),
         ("photos", "0001_initial"),
         ("articles", "0001_initial"),
     )
- 
+
     def forwards(self, orm):
-        
+
         # Adding model 'ServerItem'
-        db.create_table('imports_serveritem', (
+        db.create_table('ellaimports_serveritem', (
             ('id', models.AutoField(primary_key=True)),
             ('server', models.ForeignKey(orm.Server)),
             ('title', models.CharField(_('Title'), max_length=100)),
@@ -26,10 +26,10 @@ class Migration:
             ('photo_url', models.URLField(_('Image URL'), blank=True, max_length=400, verify_exists=False)),
             ('photo', models.ForeignKey(orm['photos.Photo'], null=True, verbose_name=_('Photo'), blank=True)),
         ))
-        db.send_create_signal('imports', ['ServerItem'])
-        
+        db.send_create_signal('ellaimports', ['ServerItem'])
+
         # Adding model 'Server'
-        db.create_table('imports_server', (
+        db.create_table('ellaimports_server', (
             ('id', models.AutoField(primary_key=True)),
             ('title', models.CharField(_('Title'), max_length=100)),
             ('domain', models.URLField(_('Domain'), verify_exists=False)),
@@ -37,26 +37,26 @@ class Migration:
             ('url', models.URLField(_('Atom URL'), blank=True, max_length=300, verify_exists=False)),
             ('category', models.ForeignKey(orm['core.Category'], null=True, verbose_name=_('Category'), blank=True)),
         ))
-        db.send_create_signal('imports', ['Server'])
-        
+        db.send_create_signal('ellaimports', ['Server'])
+
         # Creating unique_together for [server, slug] on ServerItem.
-        db.create_unique('imports_serveritem', ['server_id', 'slug'])
-        
-    
-    
+        db.create_unique('ellaimports_serveritem', ['server_id', 'slug'])
+
+
+
     def backwards(self, orm):
-        
+
         # Deleting model 'ServerItem'
-        db.delete_table('imports_serveritem')
-        
+        db.delete_table('ellaimports_serveritem')
+
         # Deleting model 'Server'
-        db.delete_table('imports_server')
-        
+        db.delete_table('ellaimports_server')
+
         # Deleting unique_together for [server, slug] on ServerItem.
-        db.delete_unique('imports_serveritem', ['server_id', 'slug'])
-        
-    
-    
+        db.delete_unique('ellaimports_serveritem', ['server_id', 'slug'])
+
+
+
     models = {
         'core.category': {
             'Meta': {'ordering': "('site','tree_path',)", 'unique_together': "(('site','tree_path'),)"},
@@ -91,5 +91,5 @@ class Migration:
             'url': ('models.URLField', ["_('Atom URL')"], {'blank': 'True', 'max_length': '300', 'verify_exists': 'False'})
         }
     }
-    
+
     complete_apps = ['imports']
