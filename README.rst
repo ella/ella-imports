@@ -1,4 +1,4 @@
-RSS/other site import plugin for Ella CMS
+ATOM/other site import plugin for Ella CMS
 =========================================
 
 This plugin allows to import data from arbitrary ATOM sources or from different

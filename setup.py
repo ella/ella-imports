@@ -4,7 +4,7 @@ import ella_imports
 setup(
     name='ella_imports',
     version=ella_imports.__versionstr__,
-    description='RSS/other site import plugin for Ella CMS',
+    description='ATOM/other site import plugin for Ella CMS',
     long_description='\n'.join((
         'RSS/other site import plugin for Ella CMS',
         '',
