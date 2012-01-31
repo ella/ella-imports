@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 import ella_imports
 
 setup(
-    name='ella_imports',
+    name='ella-imports',
     version=ella_imports.__versionstr__,
     description='ATOM/other site import plugin for Ella CMS',
     long_description='\n'.join((
