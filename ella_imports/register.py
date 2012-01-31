@@ -1,3 +1,3 @@
 # register admin options
-from ella.imports import admin
+from ella_imports import admin
 

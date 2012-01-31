@@ -3,7 +3,7 @@ from django import http
 
 from ella.core.cache.utils import get_cached_object_or_404
 
-from ella.imports.models import Server, ServerItem
+from ella_imports.models import Server, ServerItem
 
 
 class ServerOptions(admin.ModelAdmin):

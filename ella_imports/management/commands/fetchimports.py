@@ -27,7 +27,7 @@ class Command(NoArgsCommand):
 
     def fetch_all(self):
         "Runs fetch on all Server. Return number of errors occured."
-        from ella.imports.models import Server
+        from ella_imports.models import Server
         error_count = 0
         for server in Server.objects.all():
             try:
