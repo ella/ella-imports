@@ -14,7 +14,7 @@ class Migration:
     def forwards(self, orm):
 
         # Adding model 'ServerItem'
-        db.create_table('ellaimports_serveritem', (
+        db.create_table('ella_imports_serveritem', (
             ('id', models.AutoField(primary_key=True)),
             ('server', models.ForeignKey(orm.Server)),
             ('title', models.CharField(_('Title'), max_length=100)),
@@ -26,10 +26,10 @@ class Migration:
             ('photo_url', models.URLField(_('Image URL'), blank=True, max_length=400, verify_exists=False)),
             ('photo', models.ForeignKey(orm['photos.Photo'], null=True, verbose_name=_('Photo'), blank=True)),
         ))
-        db.send_create_signal('ellaimports', ['ServerItem'])
+        db.send_create_signal('ella_imports', ['ServerItem'])
 
         # Adding model 'Server'
-        db.create_table('ellaimports_server', (
+        db.create_table('ella_imports_server', (
             ('id', models.AutoField(primary_key=True)),
             ('title', models.CharField(_('Title'), max_length=100)),
             ('domain', models.URLField(_('Domain'), verify_exists=False)),
@@ -37,23 +37,23 @@ class Migration:
             ('url', models.URLField(_('Atom URL'), blank=True, max_length=300, verify_exists=False)),
             ('category', models.ForeignKey(orm['core.Category'], null=True, verbose_name=_('Category'), blank=True)),
         ))
-        db.send_create_signal('ellaimports', ['Server'])
+        db.send_create_signal('ella_imports', ['Server'])
 
         # Creating unique_together for [server, slug] on ServerItem.
-        db.create_unique('ellaimports_serveritem', ['server_id', 'slug'])
+        db.create_unique('ella_imports_serveritem', ['server_id', 'slug'])
 
 
 
     def backwards(self, orm):
 
         # Deleting model 'ServerItem'
-        db.delete_table('ellaimports_serveritem')
+        db.delete_table('ella_imports_serveritem')
 
         # Deleting model 'Server'
-        db.delete_table('ellaimports_server')
+        db.delete_table('ella_imports_server')
 
         # Deleting unique_together for [server, slug] on ServerItem.
-        db.delete_unique('ellaimports_serveritem', ['server_id', 'slug'])
+        db.delete_unique('ella_imports_serveritem', ['server_id', 'slug'])
 
 
 
@@ -68,20 +68,20 @@ class Migration:
             '_stub': True,
             'id': ('models.AutoField', [], {'primary_key': 'True'})
         },
-        'imports.serveritem': {
+        'ella_imports.serveritem': {
             'Meta': {'ordering': "('-updated',)", 'unique_together': "(('server','slug',),)"},
             'id': ('models.AutoField', [], {'primary_key': 'True'}),
             'link': ('models.URLField', ["_('Link')"], {'max_length': '400', 'verify_exists': 'True'}),
             'photo': ('models.ForeignKey', ["orm['photos.Photo']"], {'null': 'True', 'verbose_name': "_('Photo')", 'blank': 'True'}),
             'photo_url': ('models.URLField', ["_('Image URL')"], {'blank': 'True', 'max_length': '400', 'verify_exists': 'False'}),
             'priority': ('models.IntegerField', ["_('Priority')"], {'default': '0'}),
-            'server': ('models.ForeignKey', ["orm['imports.Server']"], {}),
+            'server': ('models.ForeignKey', ["orm['ella_imports.Server']"], {}),
             'slug': ('models.SlugField', ["_('Slug')"], {'max_length': '255'}),
             'summary': ('models.TextField', ["_('Summary')"], {}),
             'title': ('models.CharField', ["_('Title')"], {'max_length': '100'}),
             'updated': ('models.DateTimeField', ["_('Updated')"], {})
         },
-        'imports.server': {
+        'ella_imports.server': {
             'Meta': {'ordering': "('title',)"},
             'category': ('models.ForeignKey', ["orm['core.Category']"], {'null': 'True', 'verbose_name': "_('Category')", 'blank': 'True'}),
             'domain': ('models.URLField', ["_('Domain')"], {'verify_exists': 'False'}),
@@ -92,4 +92,4 @@ class Migration:
         }
     }
 
-    complete_apps = ['imports']
+    complete_apps = ['ella_imports']
